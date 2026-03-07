@@ -11,6 +11,11 @@ esquema.repo.txt
 # Entorno virtual Python
 venv/
 .venv/
+api/venv/
 __pycache__/
 *.pyc
 *.pyo
+
+# Dependencias frontend
+web/node_modules/
+node_modules/
