@@ -1,0 +1,124 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: #1a1a2e;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.btnSalir {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.btnSalir:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.main {
+  padding: 1.5rem 2rem;
+  flex: 1;
+}
+
+.controles {
+  margin-bottom: 1.5rem;
+}
+
+.filtroMes {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filtroMes label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.filtroMes select {
+  padding: 0.5rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tarjeta {
+  background: white;
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  border-left: 4px solid #ddd;
+}
+
+.tarjeta span {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tarjeta strong {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.debito {
+  border-color: #e53e3e;
+}
+
+.debito strong {
+  color: #e53e3e;
+}
+
+.credito {
+  border-color: #38a169;
+}
+
+.credito strong {
+  color: #38a169;
+}
+
+.saldo {
+  border-color: #3182ce;
+}
+
+.saldo strong {
+  color: #3182ce;
+}
+
+.cargando {
+  text-align: center;
+  color: #888;
+  padding: 3rem;
+}

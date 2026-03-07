@@ -1,0 +1,16 @@
+# Ignorar credenciales y datos sensibles
+.env
+
+# Archivos de banco (datos personales)
+data/raw/
+data/processed/
+
+# Esquema del repositorio (archivo local)
+esquema.repo.txt
+
+# Entorno virtual Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo

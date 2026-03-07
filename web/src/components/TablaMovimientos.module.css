@@ -1,0 +1,76 @@
+.wrapper {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tabla thead tr {
+  background: #f0f4f8;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.tabla th {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+}
+
+.tabla tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.1s;
+}
+
+.tabla tbody tr:hover {
+  background: #f8fafc;
+}
+
+.tabla td {
+  padding: 0.75rem 1rem;
+  color: #444;
+}
+
+.fecha {
+  white-space: nowrap;
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.dependencia {
+  font-size: 0.82rem;
+  color: #999;
+}
+
+.monto {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.debito {
+  color: #e53e3e;
+}
+
+.credito {
+  color: #38a169;
+  font-weight: 600;
+}
+
+.ingreso {
+  background: #f0fff4;
+}
+
+.vacio {
+  text-align: center;
+  color: #aaa;
+  padding: 3rem;
+}
