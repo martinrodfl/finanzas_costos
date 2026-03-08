@@ -1,0 +1,10 @@
+INFO:     Started server process [5860]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:56130 - "GET /movimientos/meses HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56132 - "GET /movimientos/meses HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56137 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56141 - "GET /movimientos/meses HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56140 - "GET /movimientos/meses HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56145 - "GET /movimientos?mes=2026-02 HTTP/1.1" 200 OK

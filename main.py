@@ -82,36 +82,44 @@ def _puerto_libre(puerto: int) -> bool:
 def levantar_servicios():
     print("\n— Levantando servicios —")
 
-    # Detectar ruta del Python del venv según OS
+    logs_dir = PROJECT_ROOT / "logs"
+    logs_dir.mkdir(exist_ok=True)
+
+    # Detectar ruta del Python del venv de la API según OS
     if sys.platform == "win32":
-        venv_python = str(PROJECT_ROOT / "venv" / "Scripts" / "python.exe")
-        npm_cmd = "npm.cmd"
+        api_python = str(PROJECT_ROOT / "api" / "venv" / "Scripts" / "python.exe")
     else:
-        venv_python = str(PROJECT_ROOT / "venv" / "bin" / "python")
-        npm_cmd = "npm"
+        api_python = str(PROJECT_ROOT / "api" / "venv" / "bin" / "python")
 
     # Backend (uvicorn)
     if _puerto_libre(8000):
+        log_backend = open(logs_dir / "backend.log", "w")
         subprocess.Popen(
-            [venv_python, "-m", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"],
+            [api_python, "-m", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"],
             cwd=PROJECT_ROOT,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            stdout=log_backend,
+            stderr=log_backend,
         )
-        print("  Backend iniciado en http://localhost:8000")
+        time.sleep(2)  # Esperar a que uvicorn arranque
+        if _puerto_libre(8000):
+            print("  [ERROR] Backend no pudo iniciar. Revisá logs/backend.log")
+        else:
+            print("  Backend iniciado en http://localhost:8000")
     else:
         print("  Backend ya estaba corriendo en http://localhost:8000")
 
     # Frontend (Vite)
     if _puerto_libre(5173):
+        log_frontend = open(logs_dir / "frontend.log", "w")
         subprocess.Popen(
-            [npm_cmd, "run", "dev"],
+            "npm run dev",
             cwd=PROJECT_ROOT / "web",
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            stdout=log_frontend,
+            stderr=log_frontend,
+            shell=True,
         )
         print("  Frontend iniciado en http://localhost:5173")
-        time.sleep(3)  # Esperar a que Vite arranque
+        time.sleep(4)  # Esperar a que Vite arranque
     else:
         print("  Frontend ya estaba corriendo en http://localhost:5173")
 

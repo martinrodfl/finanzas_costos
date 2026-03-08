@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 def save(csv_path: str):
-    load_dotenv(Path(__file__).parent.parent / ".env")
+    load_dotenv(Path(__file__).parent.parent / ".env", override=True)
 
     df = pd.read_csv(csv_path)
     # Reemplaza NaN por None para que MySQL lo trate como NULL
