@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS movimientos (
     fecha DATE,
     descripcion TEXT,
     documento VARCHAR(50),
+    asunto TEXT,
     dependencia VARCHAR(100),
     debito DECIMAL(12,2),
     credito DECIMAL(12,2),

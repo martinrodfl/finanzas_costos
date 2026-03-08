@@ -21,13 +21,14 @@ def parse(input_path: str, output_path: str):
         "Fecha": "fecha",
         "Descripción": "descripcion",
         "Número de documento": "documento",
+        "Asunto": "asunto",
         "Dependencia": "dependencia",
         "Débito": "debito",
         "Crédito": "credito"
     })
 
     # Mantener solo las columnas relevantes
-    columnas = [c for c in ["fecha", "descripcion", "documento", "dependencia", "debito", "credito"] if c in df.columns]
+    columnas = [c for c in ["fecha", "descripcion", "documento", "asunto", "dependencia", "debito", "credito"] if c in df.columns]
     df = df[columnas]
 
     df["debito"] = df["debito"].fillna(0)

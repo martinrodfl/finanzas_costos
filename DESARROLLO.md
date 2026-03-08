@@ -118,7 +118,6 @@ finanzas_gastos/
 │
 ├── scripts/
 │   ├── parse_excel.py       ← parser de archivos Excel del BROU
-│   ├── parse_pdf.py         ← parser de archivos PDF del BROU
 │   └── save_mysql.py        ← guarda los datos en MySQL
 │
 ├── db/
@@ -153,11 +152,11 @@ finanzas_gastos/
 El flujo del importador sigue el patrón **ETL (Extract → Transform → Load)**:
 
 ```
-Archivo del banco (.xls / .xlsx / .pdf)
+Archivo del banco (.xls / .xlsx)
             ↓
        main.py detecta la extensión
             ↓
-   parse_excel.py  o  parse_pdf.py
+        parse_excel.py
             ↓
     CSV temporal en data/processed/
             ↓
@@ -190,14 +189,6 @@ Decisiones técnicas:
 - `_encontrar_fila_header()` escanea fila por fila hasta encontrar la celda `"Fecha"`
 - Filas de pie de página se eliminan filtrando con `pd.to_datetime(errors='coerce')`
 - `NaN` se convierte a `None` con `df.astype(object).where(pd.notnull(df), None)` para que MySQL los registre como `NULL`
-
----
-
-### `scripts/parse_pdf.py`
-
-**Función:** `parse(input_path: str, output_path: str)`
-
-Usa `pdfplumber` para leer el texto del PDF página por página. Detecta líneas de movimientos con el regex `r"(\d{2}/\d{2}/\d{4})\s+(.*)"` y extrae montos en formato uruguayo (`1.234,56`).
 
 ---
 

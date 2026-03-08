@@ -1,5 +1,9 @@
 #!/home/martin/Programacion/Proyectos/Python/finanzas_gastos/venv/bin/python
 import sys
+import subprocess
+import time
+import socket
+import webbrowser
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent
@@ -25,9 +29,7 @@ def obtener_ruta():
             title="Seleccioná el archivo de movimientos del banco",
             initialdir=Path.home(),
             filetypes=[
-                ("Archivos del banco", "*.xls *.xlsx *.pdf"),
                 ("Excel", "*.xls *.xlsx"),
-                ("PDF", "*.pdf"),
                 ("Todos los archivos", "*.*"),
             ]
         )
@@ -41,7 +43,7 @@ def obtener_ruta():
 
     except Exception:
         # Fallback a entrada por terminal si tkinter falla
-        entrada = input("Ingresá la ruta al archivo del banco (.xls, .xlsx o .pdf): ").strip().strip("'\"")
+        entrada = input("Ingresá la ruta al archivo del banco (.xls o .xlsx): ").strip().strip("'\"")  
         return Path(entrada)
 
 
@@ -61,18 +63,55 @@ def main():
         import parse_excel
         parse_excel.parse(str(ruta), str(CSV_OUTPUT))
 
-    elif extension == ".pdf":
-        import parse_pdf
-        parse_pdf.parse(str(ruta), str(CSV_OUTPUT))
-
     else:
-        print(f"Formato no soportado: '{extension}'. Usá un archivo .xls, .xlsx o .pdf.")
+        print(f"Formato no soportado: '{extension}'. Usá un archivo .xls o .xlsx.")
         sys.exit(1)
 
     import save_mysql
     save_mysql.save(str(CSV_OUTPUT))
 
     print("\n✓ Proceso completado exitosamente.")
+
+    levantar_servicios()
+
+
+def _puerto_libre(puerto: int) -> bool:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        return s.connect_ex(("localhost", puerto)) != 0
+
+
+def levantar_servicios():
+    print("\n— Levantando servicios —")
+
+    venv_python = str(PROJECT_ROOT / "venv" / "bin" / "python")
+
+    # Backend (uvicorn)
+    if _puerto_libre(8000):
+        subprocess.Popen(
+            [venv_python, "-m", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"],
+            cwd=PROJECT_ROOT,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        print("  Backend iniciado en http://localhost:8000")
+    else:
+        print("  Backend ya estaba corriendo en http://localhost:8000")
+
+    # Frontend (Vite)
+    if _puerto_libre(5173):
+        subprocess.Popen(
+            ["npm", "run", "dev"],
+            cwd=PROJECT_ROOT / "web",
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        print("  Frontend iniciado en http://localhost:5173")
+        time.sleep(3)  # Esperar a que Vite arranque
+    else:
+        print("  Frontend ya estaba corriendo en http://localhost:5173")
+
+    webbrowser.open("http://localhost:5173")
+    print("  Navegador abierto. ¡Listo!")
 
 
 if __name__ == "__main__":
