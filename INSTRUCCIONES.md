@@ -21,8 +21,10 @@
 Desde la carpeta del proyecto:
 
 ```bash
-python main.py
+./main.py
 ```
+
+> **No necesitás activar el entorno virtual manualmente.** El script lo hace solo gracias al shebang configurado en la primera línea del archivo.
 
 Se abrirá una **ventana para seleccionar el archivo**. Navegá hasta donde guardaste el archivo, seleccionalo y hacé clic en **Abrir**.
 
@@ -49,19 +51,19 @@ Excel procesado: 39 registros → data/processed/movimientos.csv
 Si preferís pasar la ruta del archivo directamente sin que se abra la ventana:
 
 ```bash
-python main.py /ruta/al/archivo/movimientos.xls
+./main.py /ruta/al/archivo/movimientos.xls
 ```
 
 ---
 
 ## Solución de problemas
 
-| Problema                          | Qué hacer                                                                                                    |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| No se abre la ventana de archivos | Instalá tkinter: `sudo dnf install python3-tkinter` (Fedora) o `sudo apt install python3-tk` (Ubuntu/Debian) |
-| `ModuleNotFoundError`             | Activá el entorno virtual (`source venv/bin/activate`) y ejecutá `pip install -r requirements.txt`           |
-| `Error de conexión a MySQL`       | Verificá que MySQL esté corriendo y que las credenciales en `.env` sean correctas                            |
-| El archivo no es reconocido       | Usá el archivo original exportado del BROU sin modificarlo                                                   |
+| Problema                          | Qué hacer                                                                                                                                 |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| No se abre la ventana de archivos | Instalá tkinter: `sudo dnf install python3-tkinter` (Fedora) o `sudo apt install python3-tk` (Ubuntu/Debian)                              |
+| `ModuleNotFoundError`             | Ejecutá `pip install -r requirements.txt` desde dentro del entorno virtual: `source venv/bin/activate && pip install -r requirements.txt` |
+| `Error de conexión a MySQL`       | Verificá que MySQL esté corriendo y que las credenciales en `.env` sean correctas                                                         |
+| El archivo no es reconocido       | Usá el archivo original exportado del BROU sin modificarlo                                                                                |
 
 ---
 

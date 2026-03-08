@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 import pandas as pd
 import mysql.connector
 from dotenv import load_dotenv
@@ -28,8 +29,9 @@ def save(csv_path: str):
 
     count = 0
     for _, row in df.iterrows():
+        fecha = datetime.strptime(row["fecha"], "%d/%m/%Y").date() if isinstance(row["fecha"], str) else row["fecha"]
         cursor.execute(sql, (
-            row["fecha"],
+            fecha,
             row["descripcion"],
             row.get("documento", None),
             row.get("dependencia", None),

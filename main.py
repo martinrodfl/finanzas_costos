@@ -1,3 +1,4 @@
+#!/home/martin/Programacion/Proyectos/Python/finanzas_gastos/venv/bin/python
 import sys
 from pathlib import Path
 
