@@ -1,4 +1,3 @@
-#!/home/martin/Programacion/Proyectos/Python/finanzas_gastos/venv/bin/python
 import sys
 import subprocess
 import time
@@ -83,7 +82,13 @@ def _puerto_libre(puerto: int) -> bool:
 def levantar_servicios():
     print("\n— Levantando servicios —")
 
-    venv_python = str(PROJECT_ROOT / "venv" / "bin" / "python")
+    # Detectar ruta del Python del venv según OS
+    if sys.platform == "win32":
+        venv_python = str(PROJECT_ROOT / "venv" / "Scripts" / "python.exe")
+        npm_cmd = "npm.cmd"
+    else:
+        venv_python = str(PROJECT_ROOT / "venv" / "bin" / "python")
+        npm_cmd = "npm"
 
     # Backend (uvicorn)
     if _puerto_libre(8000):
@@ -100,7 +105,7 @@ def levantar_servicios():
     # Frontend (Vite)
     if _puerto_libre(5173):
         subprocess.Popen(
-            ["npm", "run", "dev"],
+            [npm_cmd, "run", "dev"],
             cwd=PROJECT_ROOT / "web",
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,

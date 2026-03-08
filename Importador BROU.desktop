@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Importador BROU
+Comment=Importa movimientos bancarios del BROU a la base de datos
+Exec=bash -c 'cd "$(dirname "%k")" && python3 run.py; read -rp "Presioná Enter para cerrar..."'
+Icon=accessories-calculator
+Terminal=true
+Categories=Finance;Office;
+StartupNotify=true

@@ -18,13 +18,41 @@
 
 ### Paso 2 — Ejecutá el sistema
 
-Desde la carpeta del proyecto, un solo comando hace todo:
+#### Primera vez en Linux: instalá el acceso directo
+
+En Linux, el acceso directo necesita tener la ruta absoluta del proyecto. Ejecutá esto **una sola vez**:
 
 ```bash
-./main.py
+bash instalar_acceso_directo.sh
 ```
 
-Eso es todo. El script se encarga de:
+Esto crea el ícono **Importador BROU** en tu Escritorio. Desde ese momento, solo hacés doble click ahí.
+
+#### Uso diario (sin terminal)
+
+| OS          | Cómo abrir                                                     |
+| ----------- | -------------------------------------------------------------- |
+| **Windows** | Doble click en `run.bat` dentro de la carpeta del proyecto     |
+| **Linux**   | Doble click en el ícono **Importador BROU** del Escritorio     |
+| **Mac**     | Doble click en `run.command` dentro de la carpeta del proyecto |
+
+> **Mac:** la primera vez puede bloquear el archivo. Abrí _Terminal_, andá a la carpeta del proyecto y ejecutá `chmod +x run.command`. Después ya podés hacer doble click normalmente.
+
+Si preferís usar la terminal directamente:
+
+**Linux / Mac**
+
+```bash
+python run.py
+```
+
+**Windows**
+
+```bat
+python run.py
+```
+
+El script se encarga de:
 
 1. Abrir una **ventana para seleccionar el archivo** del banco
 2. **Parsear** el archivo y guardar los movimientos en la base de datos
@@ -61,22 +89,31 @@ Si ejecutás el script una segunda vez (para importar otro mes), los servicios y
 
 Si preferís pasar la ruta del archivo directamente sin que se abra la ventana:
 
+**Linux / Mac**
+
 ```bash
-./main.py /ruta/al/archivo/movimientos.xls
+python run.py /ruta/al/archivo/movimientos.xls
+```
+
+**Windows**
+
+```bat
+python run.py C:\Users\vos\Downloads\movimientos.xls
 ```
 
 ---
 
 ## Solución de problemas
 
-| Problema                          | Qué hacer                                                                                                    |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| No se abre la ventana de archivos | Instalá tkinter: `sudo dnf install python3-tkinter` (Fedora) o `sudo apt install python3-tk` (Ubuntu/Debian) |
-| `ModuleNotFoundError`             | Ejecutá `source venv/bin/activate && pip install -r requirements.txt`                                        |
-| La web no carga datos             | Verificá que MySQL esté corriendo. El backend estará en `http://localhost:8000`                              |
-| `Error de conexión a MySQL`       | Verificá que MySQL esté corriendo y que las credenciales en `.env` sean correctas                            |
-| El archivo no es reconocido       | El sistema solo acepta `.xls` o `.xlsx`. Exportá desde el BROU en formato **Excel**                          |
-| Los servicios no levantan         | Revisá que el puerto 8000 y 5173 estén libres: `ss -tlnp \| grep -E '8000\|5173'`                            |
+| Problema                          | Qué hacer                                                                                                                                              |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| No se abre la ventana de archivos | **Linux:** `sudo dnf install python3-tkinter` (Fedora) o `sudo apt install python3-tk` (Ubuntu). **Windows/Mac:** tkinter viene incluido con Python    |
+| `ModuleNotFoundError`             | **Linux/Mac:** `source venv/bin/activate && pip install -r requirements.txt` — **Windows:** `venv\Scripts\activate && pip install -r requirements.txt` |
+| La web no carga datos             | Verificá que MySQL esté corriendo. El backend estará en `http://localhost:8000`                                                                        |
+| `Error de conexión a MySQL`       | Verificá que MySQL esté corriendo y que las credenciales en `.env` sean correctas                                                                      |
+| El archivo no es reconocido       | El sistema solo acepta `.xls` o `.xlsx`. Exportá desde el BROU en formato **Excel**                                                                    |
+| Los servicios no levantan (Linux) | Revisá puertos libres: `ss -tlnp \| grep -E '8000\|5173'`                                                                                              |
+| Los servicios no levantan (Win)   | Revisá puertos libres: `netstat -ano \| findstr "8000 5173"`                                                                                           |
 
 ---
 
