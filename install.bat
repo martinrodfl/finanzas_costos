@@ -87,8 +87,7 @@ echo [OK] Dependencias API instaladas
 echo.
 echo --- Frontend (npm install) ---
 cd web
-npm install
-if errorlevel 1 ( echo [ERROR] Fallo npm install & cd .. & pause & exit /b 1 )
+call npm install --no-audit --fund=false
 cd ..
 echo [OK] Frontend instalado
 
@@ -116,19 +115,15 @@ if exist .env (
 :: --- Base de datos MySQL ---
 echo.
 echo --- Base de datos MySQL ---
-mysql -u %DB_USER% -p%DB_PASSWORD% -h %DB_HOST% < db\schemas.sql
+venv\Scripts\python scripts\setup_db.py
 if errorlevel 1 (
     echo [AVISO] No se pudo crear la DB automaticamente.
     echo         Ejecuta manualmente: mysql -u root -p ^< db\schemas.sql
-) else (
-    echo [OK] Base de datos creada
 )
 
 :: --- Carpetas necesarias ---
 if not exist data\processed mkdir data\processed
-if not exist data
-aw mkdir data
-aw
+if not exist data\raw mkdir data\raw
 if not exist logs mkdir logs
 echo [OK] Carpetas creadas
 

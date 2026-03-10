@@ -12,7 +12,6 @@ echo   - api\venv\
 echo   - web\node_modules\
 echo   - data\
 echo   - logs\
-echo   - .env
 echo.
 echo El codigo fuente NO se toca.
 echo.
@@ -58,12 +57,6 @@ if exist logs (
     echo [SKIP] logs\ no existe
 )
 
-if exist .env (
-    del .env
-    echo [OK] .env eliminado
-) else (
-    echo [SKIP] .env no existe
-)
 
 echo.
 echo =================================================

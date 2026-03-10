@@ -99,6 +99,7 @@ def levantar_servicios():
             cwd=PROJECT_ROOT,
             stdout=log_backend,
             stderr=log_backend,
+            stdin=subprocess.DEVNULL,
         )
         time.sleep(2)  # Esperar a que uvicorn arranque
         if _puerto_libre(8000):
@@ -117,6 +118,7 @@ def levantar_servicios():
             stdout=log_frontend,
             stderr=log_frontend,
             shell=True,
+            stdin=subprocess.DEVNULL,
         )
         print("  Frontend iniciado en http://localhost:5173")
         time.sleep(4)  # Esperar a que Vite arranque
