@@ -1,0 +1,228 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cargando {
+  text-align: center;
+  color: #888;
+  padding: 3rem;
+}
+
+/* Resumen global */
+.resumenGlobal {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.pill {
+  background: white;
+  border-radius: 10px;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  border-left: 4px solid #ddd;
+}
+
+.pill span {
+  font-size: 0.78rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pill strong {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.pillEgreso {
+  border-color: #e53e3e;
+}
+
+.pillIngreso {
+  border-color: #38a169;
+}
+
+.pillSaldo {
+  border-color: #3182ce;
+}
+
+/* Gráfico */
+.graficoCard {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem 1.75rem;
+}
+
+.graficoTitulo {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 1.25rem;
+}
+
+.grafico {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  height: 180px;
+  border-bottom: 2px solid #edf2f7;
+  padding-bottom: 0.5rem;
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.barras {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.barraWrap {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  max-width: 20px;
+}
+
+.barra {
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  min-height: 3px;
+  transition: height 0.4s ease;
+}
+
+.barraEgreso {
+  background: #fc8181;
+}
+
+.barraIngreso {
+  background: #68d391;
+}
+
+.labelMes {
+  font-size: 0.72rem;
+  color: #999;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.leyenda {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.leyendaEgreso {
+  color: #e53e3e;
+  font-weight: 600;
+}
+
+.leyendaIngreso {
+  color: #38a169;
+  font-weight: 600;
+}
+
+/* Tabla */
+.tablaCard {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tabla thead tr {
+  background: #f0f4f8;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.tabla th {
+  padding: 0.85rem 1.25rem;
+  text-align: left;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+}
+
+.tabla tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.1s;
+}
+
+.tabla tbody tr:hover {
+  background: #f8fafc;
+}
+
+.tabla td {
+  padding: 0.85rem 1.25rem;
+  color: #444;
+}
+
+.mesTd {
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #2d3748;
+}
+
+.monto {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.colorEgreso {
+  color: #e53e3e;
+  font-weight: 600;
+}
+
+.colorIngreso {
+  color: #38a169;
+  font-weight: 600;
+}
+
+/* Barra de proporción */
+.propWrapper {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #edf2f7;
+  min-width: 120px;
+}
+
+.propEgreso {
+  background: #fc8181;
+  transition: width 0.3s;
+}
+
+.propIngreso {
+  background: #68d391;
+  transition: width 0.3s;
+}

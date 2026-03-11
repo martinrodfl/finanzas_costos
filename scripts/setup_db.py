@@ -35,6 +35,7 @@ def main():
                 cursor.execute(statement)
 
         conn.commit()
+
         cursor.close()
         conn.close()
         print("[OK] Base de datos y tabla creadas exitosamente")

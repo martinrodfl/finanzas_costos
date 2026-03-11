@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, HTTPException
 from typing import Optional
+from pydantic import BaseModel
 from api.db import get_connection
 from api.auth import get_usuario_actual
 
@@ -16,11 +17,20 @@ def listar(
 
     if mes:
         cursor.execute(
-            "SELECT * FROM movimientos WHERE DATE_FORMAT(fecha, '%Y-%m') = %s ORDER BY fecha DESC",
+            """SELECT m.*, r.categoria AS categoria_regla
+               FROM movimientos m
+               LEFT JOIN categoria_reglas r ON r.descripcion = m.descripcion
+               WHERE DATE_FORMAT(m.fecha, '%Y-%m') = %s
+               ORDER BY m.fecha DESC""",
             (mes,)
         )
     else:
-        cursor.execute("SELECT * FROM movimientos ORDER BY fecha DESC")
+        cursor.execute(
+            """SELECT m.*, r.categoria AS categoria_regla
+               FROM movimientos m
+               LEFT JOIN categoria_reglas r ON r.descripcion = m.descripcion
+               ORDER BY m.fecha DESC"""
+        )
 
     rows = cursor.fetchall()
     cursor.close()
@@ -68,3 +78,38 @@ def resumen(_usuario: str = Depends(get_usuario_actual)):
     cursor.close()
     conn.close()
     return rows
+
+
+class CategoriaUpdate(BaseModel):
+    categoria: Optional[str] = None
+
+
+@router.patch("/{id}/categoria")
+def actualizar_categoria(
+    id: int,
+    body: CategoriaUpdate,
+    _usuario: str = Depends(get_usuario_actual)
+):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "UPDATE movimientos SET categoria_manual = %s WHERE id = %s",
+        (body.categoria, id)
+    )
+    if cursor.rowcount == 0:
+        cursor.close()
+        conn.close()
+        raise HTTPException(status_code=404, detail="Movimiento no encontrado")
+    if body.categoria is not None:
+        cursor.execute(
+            """
+            INSERT INTO categoria_reglas (descripcion, categoria)
+            SELECT descripcion, %s FROM movimientos WHERE id = %s
+            ON DUPLICATE KEY UPDATE categoria = VALUES(categoria)
+            """,
+            (body.categoria, id)
+        )
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return {"ok": True}

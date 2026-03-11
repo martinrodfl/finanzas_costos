@@ -40,6 +40,11 @@
 
 .controles {
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .filtroMes {
@@ -121,4 +126,40 @@
   text-align: center;
   color: #888;
   padding: 3rem;
+}
+
+.toggleVista {
+  display: flex;
+  background: #edf2f7;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.toggleBtn {
+  padding: 0.4rem 1rem;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: #666;
+  transition: all 0.15s;
+}
+
+.toggleBtn:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: #333;
+}
+
+.toggleActivo {
+  padding: 0.4rem 1rem;
+  border: none;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: #2d3748;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }

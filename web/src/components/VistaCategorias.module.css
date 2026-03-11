@@ -1,0 +1,200 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vacio {
+  text-align: center;
+  color: #888;
+  padding: 3rem;
+}
+
+.grupo {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+.cabecera {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2rem 10rem 5rem 1fr 14rem 1.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem;
+  background: none;
+  border: none;
+  border-left: 4px solid #ddd;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.cabecera:hover {
+  background: #f8fafc;
+}
+
+.icono {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.nombre {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #2d3748;
+}
+
+.cantidad {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.barraWrapper {
+  height: 8px;
+  background: #edf2f7;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barra {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  min-width: 4px;
+}
+
+.totales {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.egreso {
+  font-weight: 700;
+  color: #e53e3e;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ingreso {
+  font-weight: 700;
+  color: #38a169;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.chevron {
+  font-size: 0.7rem;
+  color: #aaa;
+  text-align: center;
+}
+
+/* Tabla interna */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  border-top: 1px solid #edf2f7;
+}
+
+.tabla thead tr {
+  background: #f7fafc;
+}
+
+.tabla th {
+  padding: 0.6rem 1.25rem;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #718096;
+}
+
+.tabla tbody tr {
+  border-top: 1px solid #f0f0f0;
+  transition: background 0.1s;
+}
+
+.tabla tbody tr:hover {
+  background: #f8fafc;
+}
+
+.tabla td {
+  padding: 0.6rem 1.25rem;
+  color: #444;
+}
+
+.fecha {
+  white-space: nowrap;
+  color: #999;
+  font-size: 0.82rem;
+}
+
+.monto {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.colorEgreso {
+  color: #e53e3e;
+}
+
+.colorIngreso {
+  color: #38a169;
+}
+
+/* Selector de categoría inline */
+.selectorCat {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.selectCat {
+  font-size: 0.82rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  border: 1.5px solid #ddd;
+  background: white;
+  cursor: pointer;
+  outline: none;
+  max-width: 180px;
+  transition: border-color 0.15s;
+}
+
+.selectCat:hover {
+  border-color: #a0aec0;
+}
+
+.btnReset {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #a0aec0;
+  padding: 0 0.2rem;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.btnReset:hover {
+  color: #e53e3e;
+}
+
+.guardando {
+  color: #a0aec0;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.etiquetaRegla {
+  color: #a0aec0;
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: default;
+  user-select: none;
+}

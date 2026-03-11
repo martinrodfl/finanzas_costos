@@ -11,5 +11,14 @@ CREATE TABLE IF NOT EXISTS movimientos (
     dependencia VARCHAR(100),
     debito DECIMAL(12,2),
     credito DECIMAL(12,2),
+    categoria_manual VARCHAR(50) NULL DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS categoria_reglas (
+    descripcion VARCHAR(500) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (descripcion(255))
+);
+
